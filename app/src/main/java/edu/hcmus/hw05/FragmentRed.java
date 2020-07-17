@@ -72,7 +72,25 @@ public class FragmentRed extends Fragment implements FragmentCallbacks {
 
             @Override
             public void onClick(View v) {
-                main.onMsgFromFragToMain("RED-FRAG", String.valueOf(PositionButton.First));
+                main.onMsgFromFragToMain("RED-FRAG", String.valueOf(DirecButton.First));
+            }
+        });
+        btnLast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                main.onMsgFromFragToMain("RED-FRAG", String.valueOf(DirecButton.Last));
+            }
+        });
+        btnNext.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                main.onMsgFromFragToMain("RED-FRAG", String.valueOf(DirecButton.Next));
+            }
+        });
+        btnPrevious.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                main.onMsgFromFragToMain("RED-FRAG", String.valueOf(DirecButton.Previous));
             }
         });
 

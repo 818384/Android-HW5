@@ -20,18 +20,20 @@ import java.util.List;
 
 public class FragmentBlue extends Fragment implements FragmentCallbacks{
 
-
     private TextView tvSelect;
     private ListView listView;
     private List<User> users = new ArrayList<>();
 
     // this fragment shows a ListView
-    CustomAdapter adapter;
-    MainActivity main;
-    Context context = null;
-    String message = "";
-    // data to fill-up the ListView
-    private String items[] = {"Text-on-Line-00", "Text-on-Line-01", "Text-on-Line-10"};
+    private CustomAdapter adapter;
+    private MainActivity main;
+    private Context context = null;
+    private String message = "";
+
+    public int getLengthUserArray()
+    {
+        return users.size();
+    }
 
     // convenient constructor(accept arguments, copy them to a bundle, binds bundle to fragment)
     public static FragmentBlue newInstance(String strArg) {
@@ -95,7 +97,8 @@ public class FragmentBlue extends Fragment implements FragmentCallbacks{
     public void onMsgFromMainToFragment(String strValue) {
         int position = Integer.parseInt(strValue);
         tvSelect.setText("Mã số: " + users.get(position).getUserID());
-        adapter.getView(position, listView, listView);
+
+        adapter.notifyDataSetChanged();
         String usr = users.get(position).getUserID() + "," +
                 users.get(position).getUserName() + "," +
                 users.get(position).getClassName() + "," +

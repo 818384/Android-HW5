@@ -1,20 +1,18 @@
 package edu.hcmus.hw05;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends FragmentActivity implements MainCallbacks {
-    FragmentTransaction ft; FragmentRed redFragment; FragmentBlue blueFragment;
+
+    private FragmentTransaction ft;
+    private FragmentRed redFragment;
+    private FragmentBlue blueFragment;
+    private int currentPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +36,22 @@ public class MainActivity extends FragmentActivity implements MainCallbacks {
         if (sender.equals("RED-FRAG")) {
             switch (strValue) {
                 case "0":
+                    currentPos = 0;
                     blueFragment.onMsgFromMainToFragment(strValue);
+                    break;
+                case "1":
+                    if (currentPos > 0)
+                        currentPos -= 1;
+                    blueFragment.onMsgFromMainToFragment(String.valueOf(currentPos));
+                    break;
+                case "2":
+                    if (currentPos < blueFragment.getLengthUserArray()-1)
+                        currentPos += 1;
+                    blueFragment.onMsgFromMainToFragment(String.valueOf(currentPos));
+                    break;
+                case "3":
+                    currentPos = blueFragment.getLengthUserArray()-1;
+                    blueFragment.onMsgFromMainToFragment(String.valueOf(currentPos));
                     break;
             }
         }
