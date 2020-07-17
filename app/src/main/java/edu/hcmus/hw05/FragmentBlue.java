@@ -28,7 +28,6 @@ public class FragmentBlue extends Fragment implements FragmentCallbacks{
     private CustomAdapter adapter;
     private MainActivity main;
     private Context context = null;
-    private String message = "";
 
     public int getLengthUserArray()
     {
@@ -81,7 +80,8 @@ public class FragmentBlue extends Fragment implements FragmentCallbacks{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                String usr = users.get(position).getUserID() + "," +
+                String usr = String.valueOf(position) + ";" +
+                             users.get(position).getUserID() + "," +
                              users.get(position).getUserName() + "," +
                              users.get(position).getClassName() + "," +
                              users.get(position).getPointAVG().toString();
@@ -99,10 +99,11 @@ public class FragmentBlue extends Fragment implements FragmentCallbacks{
         tvSelect.setText("Mã số: " + users.get(position).getUserID());
 
         adapter.notifyDataSetChanged();
-        String usr = users.get(position).getUserID() + "," +
-                users.get(position).getUserName() + "," +
-                users.get(position).getClassName() + "," +
-                users.get(position).getPointAVG().toString();
+        String usr = String.valueOf(position) + ";" +
+                     users.get(position).getUserID() + "," +
+                     users.get(position).getUserName() + "," +
+                     users.get(position).getClassName() + "," +
+                     users.get(position).getPointAVG().toString();
         main.onMsgFromFragToMain("BLUE-FRAG", usr);
     }
 }

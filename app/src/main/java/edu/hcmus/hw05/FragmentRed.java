@@ -30,7 +30,6 @@ public class FragmentRed extends Fragment implements FragmentCallbacks {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-// Activities containing this fragment must implement interface: MainCallbacks
         if (!(getActivity() instanceof MainCallbacks)) {
             throw new IllegalStateException("Activity must implement MainCallbacks");
         }
@@ -39,7 +38,6 @@ public class FragmentRed extends Fragment implements FragmentCallbacks {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-// inflate res/layout_red.xml which includes a textview and a button
 
         LinearLayout layout_red = (LinearLayout) inflater.inflate(R.layout.layout_red, null);
         txtInfoUser = (TextView) layout_red.findViewById(R.id.txtInfoUser);
@@ -51,23 +49,6 @@ public class FragmentRed extends Fragment implements FragmentCallbacks {
         btnNext = (Button) layout_red.findViewById(R.id.btnNext);
         btnLast = (Button) layout_red.findViewById(R.id.btnLast);
 
-
-// show string argument supplied by constructor (if any!)
-        try {
-            Bundle arguments = getArguments();
-            txtInfoUser.setText(arguments.getString("arg1", ""));
-        } catch (Exception e) {
-            Log.e("RED BUNDLE ERROR – ", "" + e.getMessage());
-        }
-// clicking the button changes the time displayed and sends a copy to MainActivity
-        /*btnRedClock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String redMessage = "Red clock:\n" + new Date().toString();
-                txtRed.setText(redMessage);
-                main.onMsgFromFragToMain("RED-FRAG", redMessage);
-            }
-        });*/
         btnFirst.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -99,7 +80,7 @@ public class FragmentRed extends Fragment implements FragmentCallbacks {
 
     @Override
     public void onMsgFromMainToFragment(String user) {
-// receiving a message from MainActivity (it may happen at any point in time)
+
         String[] usr = user.split(",");
         txtInfoUser.setText( usr[0]);
         txtUsername.setText("Họ tên: " + usr[1]);
