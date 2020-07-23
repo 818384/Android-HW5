@@ -12,8 +12,14 @@ public class MainActivity extends FragmentActivity implements MainCallbacks {
     private FragmentTransaction ft;
     private FragmentRed redFragment;
     private FragmentBlue blueFragment;
-    private int currentPos;
+    private static int currentPos = -1;
     private String[] user;
+
+
+    public static int getCurrentPos()
+    {
+        return currentPos;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

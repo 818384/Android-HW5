@@ -69,13 +69,11 @@ public class FragmentBlue extends Fragment implements FragmentCallbacks{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         LinearLayout layout_blue = (LinearLayout) inflater.inflate(R.layout.layout_blue, null);
-
+        adapter = new CustomAdapter(context, R.layout.layout_row_custom, users);
         tvSelect = (TextView) layout_blue.findViewById(R.id.tvSelect);
         listView = (ListView) layout_blue.findViewById(R.id.myList);
         listView.setBackgroundColor(Color.parseColor("#ffccddff"));
-        adapter = new CustomAdapter(context, R.layout.layout_blue, users);
         listView.setAdapter(adapter);
-        listView.setSelection(0);
         listView.smoothScrollToPosition(0);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -86,6 +84,7 @@ public class FragmentBlue extends Fragment implements FragmentCallbacks{
                              users.get(position).getClassName() + "," +
                              users.get(position).getPointAVG().toString();
                 main.onMsgFromFragToMain("BLUE-FRAG", usr);
+                adapter.notifyDataSetChanged();
                 tvSelect.setText("Mã số: " + users.get(position).getUserID());
             }
         });

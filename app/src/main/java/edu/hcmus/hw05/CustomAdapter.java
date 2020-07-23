@@ -2,6 +2,7 @@ package edu.hcmus.hw05;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +31,19 @@ public class CustomAdapter extends ArrayAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.layout_blue, null);
+            convertView = inflater.inflate(R.layout.layout_row_custom, null);
         }
+        //View row = inflater.inflate(R.layout.layout_row_custom, parent, false);
         ImageView avatar = (ImageView) convertView.findViewById(R.id.avatar);
-        TextView classname = (TextView) convertView.findViewById(R.id.tvClassName);
+        TextView idUser = (TextView) convertView.findViewById(R.id.tvid);
         avatar.setImageResource(users.get(position).getNameAvatar());
-        classname.setText(users.get(position).getUserID());
+        idUser.setText(users.get(position).getUserID());
+
+        if(position == MainActivity.getCurrentPos()){
+            convertView.setBackgroundColor(Color.YELLOW);
+        }
+        else
+            convertView.setBackgroundColor(Color.parseColor("#ffccddff"));
         return convertView;
     }
 }
